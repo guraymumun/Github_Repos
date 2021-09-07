@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.githubrepos.data.networking.NetworkState
 import com.example.githubrepos.data.repositories.GithubRepoRepository
 import com.example.githubrepos.domain.model.Repo
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val githubRepoRepository: GithubRepoRepository) : ViewModel() {
@@ -21,7 +22,7 @@ class MainViewModel(private val githubRepoRepository: GithubRepoRepository) : Vi
     private fun requestGetRepos() {
         networkState.value = NetworkState.Loading()
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val response = githubRepoRepository.getGithubRepoList()
             if (response.isSuccessful)
                 networkState.value = NetworkState.Success(response.body().orEmpty())
