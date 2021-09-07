@@ -1,10 +1,10 @@
 package com.example.githubrepos.data.networking
 
 import com.example.githubrepos.BuildConfig
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class ServiceGenerator {
 
@@ -20,7 +20,7 @@ class ServiceGenerator {
 
             return Retrofit.Builder()
                 .client(httpClient.build())
-                .baseUrl("https://api.github.com/")
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create()).build()
         }
 
