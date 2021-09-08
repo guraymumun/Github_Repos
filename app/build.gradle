@@ -20,7 +20,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", 'BASE_URL', "\"https://api.github.com/\""
+            buildConfigField "String", 'BASE_URL', RELEASE_HOST
         }
         staging {
             buildConfigField "String", 'BASE_URL', "\"https://api.github.com/\""

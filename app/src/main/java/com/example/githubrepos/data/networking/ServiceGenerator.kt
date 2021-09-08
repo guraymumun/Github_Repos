@@ -1,6 +1,7 @@
 package com.example.githubrepos.data.networking
 
 import com.example.githubrepos.BuildConfig
+import com.example.githubrepos.data.networking.helper.MyCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -21,6 +22,7 @@ class ServiceGenerator {
             return Retrofit.Builder()
                 .client(httpClient.build())
                 .baseUrl(BuildConfig.BASE_URL)
+                .addCallAdapterFactory(MyCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create()).build()
         }
 

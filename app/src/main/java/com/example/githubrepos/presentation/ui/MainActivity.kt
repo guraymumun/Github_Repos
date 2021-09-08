@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubrepos.data.networking.NetworkState
+import com.example.githubrepos.data.networking.helper.NetworkState
 import com.example.githubrepos.databinding.ActivityMainBinding
 import com.example.githubrepos.presentation.adapter.RepoRecyclerAdapter
 import com.example.githubrepos.presentation.viewmodel.MainViewModel
@@ -29,13 +29,13 @@ class MainActivity : AppCompatActivity() {
             when (it) {
                 is NetworkState.Success -> {
                     adapter.submitList(it.data)
-                    Log.d("SUCCESS", "SUCCESS")
+                    Log.d("NETWORK_STATUS", "SUCCESS")
                 }
                 is NetworkState.Error -> {
-                    Log.e("ERROR", "ERROR")
+                    Log.e("NETWORK_STATUS", it.message)
                 }
                 is NetworkState.Loading -> {
-                    Log.i("LOADING", "LOADING")
+                    Log.i("NETWORK_STATUS", "LOADING")
                 }
             }
         }
