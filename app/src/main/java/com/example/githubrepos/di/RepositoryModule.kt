@@ -5,5 +5,5 @@ import com.example.githubrepos.data.repositories.GithubRepositoryImpl
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    factory<GithubRepoRepository> { GithubRepositoryImpl(get()) }
+    factory<GithubRepoRepository> { GithubRepositoryImpl(get(), get(), get(), get()) }
 }

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.githubrepos.data.networking.helper.NetworkState
+import com.example.githubrepos.data.networking.NetworkState
 import com.example.githubrepos.data.repositories.GithubRepoRepository
 import com.example.githubrepos.domain.model.Repo
 import kotlinx.coroutines.Dispatchers

@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubrepos.data.networking.helper.NetworkState
+import com.example.githubrepos.data.networking.NetworkState
 import com.example.githubrepos.databinding.ActivityMainBinding
 import com.example.githubrepos.presentation.adapter.RepoRecyclerAdapter
 import com.example.githubrepos.presentation.viewmodel.MainViewModel
@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
                     Log.d("NETWORK_STATUS", "SUCCESS")
                 }
                 is NetworkState.Error -> {
+                    adapter.submitList(it.cachedData)
                     Log.e("NETWORK_STATUS", it.message)
                 }
                 is NetworkState.Loading -> {
