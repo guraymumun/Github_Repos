@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.githubrepos.data.db.RepoDtoToEntityMapper
 import com.example.githubrepos.data.db.dao.OwnerWithReposDao
+import com.example.githubrepos.data.db.entity.OwnerEntity
+import com.example.githubrepos.data.db.entity.OwnerWithRepos
+import com.example.githubrepos.data.db.entity.RepoEntity
 import com.example.githubrepos.data.networking.NetworkState
 import com.example.githubrepos.data.networking.RepoEntityToDtoMapper
 import com.example.githubrepos.data.networking.services.RepoService
@@ -11,6 +14,7 @@ import com.example.githubrepos.domain.model.Repo
 
 interface GithubRepoRepository {
     suspend fun getGithubRepoList(): LiveData<NetworkState<List<Repo>>>
+    suspend fun insertRepoToDb()
 }
 
 class GithubRepositoryImpl(
@@ -45,9 +49,10 @@ class GithubRepositoryImpl(
                 dao.saveOwnerWithRepos(mapperDtoToEntity.map(item))
             }
 
-            override fun loadFromDb(): LiveData<List<Repo>> = Transformations.map(dao.loadAllRepos()) {
-                mapperEntityToDto.map(it)
-            }
+            override fun loadFromDb(): LiveData<List<Repo>> =
+                Transformations.map(dao.loadAllRepos()) {
+                    mapperEntityToDto.map(it)
+                }
 
             override suspend fun createCall() = repoService.getRepos()
 
@@ -55,5 +60,17 @@ class GithubRepositoryImpl(
 
             }
         }.build().asLiveData()
+    }
+
+    override suspend fun insertRepoToDb() {
+        val randomId = (100..200).random()
+        dao.saveOwnerWithRepos(
+            listOf(
+                OwnerWithRepos(
+                    OwnerEntity(randomId, "https://upload.wikimedia.org/wikipedia/commons/7/74/Kotlin_Icon.png"),
+                    listOf(RepoEntity(randomId, "RandomRepo_$randomId", null, randomId))
+                )
+            )
+        )
     }
 }

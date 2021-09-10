@@ -2,38 +2,33 @@ package com.example.githubrepos.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.githubrepos.data.networking.NetworkState
 import com.example.githubrepos.data.repositories.GithubRepoRepository
 import com.example.githubrepos.domain.model.Repo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class MainViewModel(private val githubRepoRepository: GithubRepoRepository) : ViewModel() {
+class MainViewModel(private val githubRepoRepository: GithubRepoRepository) : BaseViewModel() {
 
-    private var _networkState = MediatorLiveData<NetworkState<List<Repo>>>()
-    val networkState: LiveData<NetworkState<List<Repo>>> get() = _networkState
+    private var _repoLiveDataList = MediatorLiveData<NetworkState<List<Repo>>>()
+    val repoLiveDataList: LiveData<NetworkState<List<Repo>>> get() = _repoLiveDataList
 
     init {
         requestGetRepos()
     }
 
     private fun requestGetRepos() {
-//        _networkState.value = NetworkState.Loading
+        makeRequest (
+            mediator = _repoLiveDataList,
+            request = { githubRepoRepository.getGithubRepoList() },
+            response = { _repoLiveDataList.postValue(it) }
+        )
+    }
 
-//        viewModelScope.launch(Dispatchers.IO) {
-//            _networkState.postValue(githubRepoRepository.getGithubRepoList())
-//        }
-
-        viewModelScope.launch {
-            val result = withContext(Dispatchers.IO) {
-                githubRepoRepository.getGithubRepoList()
-            }
-            _networkState.addSource(result) {
-                _networkState.postValue(it)
-            }
+    fun insertRandomRepoToDB() {
+        viewModelScope.launch(Dispatchers.IO) {
+            githubRepoRepository.insertRepoToDb()
         }
     }
 }
