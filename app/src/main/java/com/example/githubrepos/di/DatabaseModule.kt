@@ -11,6 +11,7 @@ val databaseModule = module {
 
     single {
         Room.databaseBuilder(androidApplication(), RepoDatabase::class.java, "Repo")
+//            .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
             .build()
     }

@@ -1,5 +1,6 @@
 package com.example.githubrepos.data.db.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.githubrepos.data.db.entity.OwnerEntity
 import com.example.githubrepos.data.db.entity.OwnerWithRepos
@@ -23,5 +24,5 @@ interface OwnerWithReposDao {
 
     @Transaction
     @Query("SELECT * FROM owner")
-    fun loadAllRepos(): List<OwnerWithRepos>
+    fun loadAllRepos(): LiveData<List<OwnerWithRepos>>
 }
