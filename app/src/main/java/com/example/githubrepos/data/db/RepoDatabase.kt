@@ -6,7 +6,7 @@ import com.example.githubrepos.data.db.dao.OwnerWithReposDao
 import com.example.githubrepos.data.db.entity.OwnerEntity
 import com.example.githubrepos.data.db.entity.RepoEntity
 
-@Database(entities = [RepoEntity::class, OwnerEntity::class], version = 5)
+@Database(entities = [RepoEntity::class, OwnerEntity::class], version = 12)
 abstract class RepoDatabase : RoomDatabase() {
     abstract fun repoDao(): OwnerWithReposDao
 }
