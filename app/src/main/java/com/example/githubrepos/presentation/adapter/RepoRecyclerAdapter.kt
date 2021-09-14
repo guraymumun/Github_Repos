@@ -10,6 +10,8 @@ import com.example.githubrepos.domain.model.Repo
 
 class RepoRecyclerAdapter : PagingDataAdapter<Repo, RepoRecyclerAdapter.RepoViewHolder>(RepoDiffCallback()) {
 
+    private lateinit var onItemClickListener: OnItemClickListener
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -25,8 +27,20 @@ class RepoRecyclerAdapter : PagingDataAdapter<Repo, RepoRecyclerAdapter.RepoView
     inner class RepoViewHolder(private val binding: ItemRepoBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(repo: Repo) {
             binding.repo = repo
+            binding.root.setOnClickListener {
+                if (onItemClickListener != null)
+                    onItemClickListener.onItemClick(repo)
+            }
         }
     }
+
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.onItemClickListener = onItemClickListener
+    }
+}
+
+interface OnItemClickListener {
+    fun onItemClick(repo: Repo)
 }
 
 class RepoDiffCallback : DiffUtil.ItemCallback<Repo>() {

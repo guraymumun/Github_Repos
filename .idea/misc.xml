@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/Gyuray.Myumyun/AndroidStudioProjects/GithubRepos/app/src/main/res/layout/activity_main.xml" value="0.22780797101449277" />
         <entry key="..\:/Users/Gyuray.Myumyun/AndroidStudioProjects/GithubRepos/app/src/main/res/layout/item_repo.xml" value="0.6" />
+        <entry key="..\:/Users/Gyuray.Myumyun/AndroidStudioProjects/GithubRepos/app/src/main/res/layout/repo_details_fragment.xml" value="0.264" />
+        <entry key="..\:/Users/Gyuray.Myumyun/AndroidStudioProjects/GithubRepos/app/src/main/res/layout/repo_list_fragment.xml" value="0.2056159420289855" />
       </map>
     </option>
   </component>
