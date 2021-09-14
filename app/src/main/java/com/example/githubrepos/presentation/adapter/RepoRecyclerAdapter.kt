@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.githubrepos.databinding.ItemRepoBinding
 import com.example.githubrepos.domain.model.Repo
 
-class RepoRecyclerAdapter : PagingDataAdapter<Repo, RepoRecyclerAdapter.RepoViewHolder>(RepoDiffCallback()) {
-
-    private lateinit var onItemClickListener: OnItemClickListener
+class RepoRecyclerAdapter(
+    private val callback: (repo: Repo) -> Unit
+) : PagingDataAdapter<Repo, RepoRecyclerAdapter.RepoViewHolder>(RepoDiffCallback()) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -28,19 +28,10 @@ class RepoRecyclerAdapter : PagingDataAdapter<Repo, RepoRecyclerAdapter.RepoView
         fun bind(repo: Repo) {
             binding.repo = repo
             binding.root.setOnClickListener {
-                if (onItemClickListener != null)
-                    onItemClickListener.onItemClick(repo)
+                callback(repo)
             }
         }
     }
-
-    fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
-        this.onItemClickListener = onItemClickListener
-    }
-}
-
-interface OnItemClickListener {
-    fun onItemClick(repo: Repo)
 }
 
 class RepoDiffCallback : DiffUtil.ItemCallback<Repo>() {
