@@ -2,7 +2,6 @@ package com.example.githubrepos.presentation.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -43,8 +42,7 @@ class RepoListFragment : BaseFragment<RepoListFragmentBinding, RepoListViewModel
         )
         adapter = RepoRecyclerAdapter { repo ->
             Navigation.findNavController(binding.root).navigate(
-                R.id.action_repoListFragment_to_repoDetailsFragment,
-                bundleOf("repo" to repo)
+                RepoListFragmentDirections.actionRepoListFragmentToRepoDetailsFragment(repo)
             )
         }
 

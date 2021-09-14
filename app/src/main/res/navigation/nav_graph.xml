@@ -18,5 +18,9 @@
         android:id="@+id/repoDetailsFragment"
         android:name="com.example.githubrepos.presentation.ui.fragment.RepoDetailsFragment"
         android:label="repo_details_fragment"
-        tools:layout="@layout/repo_details_fragment" />
+        tools:layout="@layout/repo_details_fragment">
+        <argument
+            android:name="repo"
+            app:argType="com.example.githubrepos.domain.model.Repo" />
+    </fragment>
 </navigation>
