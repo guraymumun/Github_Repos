@@ -37,10 +37,10 @@ class RepoListFragment : BaseFragment<RepoListFragmentBinding, RepoListViewModel
     }
 
     private fun initRecyclerView() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration(
-                activity,
+                requireContext(),
                 LinearLayoutManager.VERTICAL
             )
         )
